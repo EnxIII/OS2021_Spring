@@ -6,6 +6,7 @@ start:
 	pushl $message
 	calll displayStr
 loop:
+	hlt
 	jmp loop
 
 message:

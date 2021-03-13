@@ -38,11 +38,14 @@ start32:
 	movw %ax, %es
 	movw %ax, %fs
 	movw %ax, %ss
+	movw $0x18, %ax
+	movw %ax, %gs
 	movl $0x8000, %eax
 	movl %eax, %esp
-#	push $14
-#	push $message
-	call bootMain
+	push $1
+	push $0x8c00
+	call readSect
+	jmp  0x8c00
 loop32:
 	hlt
 	jmp loop32
@@ -75,6 +78,9 @@ gdt:
 
 	.word(0xffff), (0x0)
 	.byte(0x0), (0x92), (0xCF), (0x0)
+
+	.word(0xffff), (0x8000)
+	.byte(0xb), (0x92), (0xCF), (0x0)
 
 gdtdesc:
 	.word(gdtdesc - gdt - 1)
