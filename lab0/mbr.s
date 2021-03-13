@@ -5,7 +5,6 @@ start:
 	movw %ax, %ds
 	movw %ax, %es
 	movw %ax, %ss
-	movw %ax, %ss
 	movw $0x7d00, %ax
 	movw %ax, %sp
 	pushw $13
