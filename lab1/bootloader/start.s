@@ -40,27 +40,28 @@ start32:
 	movw %ax, %ss
 	movl $0x8000, %eax
 	movl %eax, %esp
-	push $14
-	push $message
-	call print
+#	push $14
+#	push $message
+	call bootMain
 loop32:
+	hlt
 	jmp loop32
 
-message:
-	.string "Hello, World!\n\0"
+#message:
+#	.string "Hello, World!\n\0"
 
-print:
-	push %ebp
-	movl 0x8(%esp), %ebp   # messgae
-	movl 0xc(%esp), %ecx   # len
-	movl $0, %edx	       # i = 0
-next:	
-	movb (%ebp, %edx, 1), %al
-	movb %al, 0xb8000(, %edx, 2)
-	incl %edx
-	loopnz next
-	pop %ebp
-	ret
+#print:
+#	push %ebp
+#	movl 0x8(%esp), %ebp   # messgae
+#	movl 0xc(%esp), %ecx   # len
+#	movl $0, %edx	       # i = 0
+#next:	
+#	movb (%ebp, %edx, 1), %al
+#	movb %al, 0xb8000(, %edx, 2)
+#	incl %edx
+#	loopnz next
+#	pop %ebp
+#	ret
 	
 
 .p2align 2

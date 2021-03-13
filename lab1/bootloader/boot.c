@@ -3,7 +3,10 @@
 #define SECTSIZE 512
 
 void bootMain(void) {
-	
+	char* vmm = (char*)0xb8000;
+	const char Hello[] = "Hello, World!\n";
+	for(int i = 0; Hello[i] != '\0'; ++i)
+		vmm[i << 1] = Hello[i];	
 }
 
 void waitDisk(void) { // waiting for disk
